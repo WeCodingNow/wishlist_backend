@@ -8,33 +8,26 @@ services:
       - "15672:15672"
     volumes:
       - rabbit:/var/lib/rabbitmq
-  # elastic:
-  #   container_name: elasticsearch
-  #   environment:
-  #     - discovery.type=single-node
-  #     - bootstrap.memory_lock=true
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
-  #   volumes:
-  #     - 'es_data:/usr/share/elasticsearch/data'
-  #   ports:
-  #     - "9200:9200"
-  #   ulimits:
-  #     memlock:
-  #       soft: -1
-  #       hard: -1
+  elastic:
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    volumes:
+      - 'es_data:/usr/share/elasticsearch/data'
+    ports:
+      - "9200:9200"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
   db:
     image: postgres
     ports:
-      - "8001:5432"
-  # crawler:
-  #   build: ./crawler
-  #   links:
-  #     - rabbitmq
-  #     - elastic
-  #   depends_on:
-  #     - "rabbitmq"
-  #     - "elastic"
-  #   restart: "on-failure"
+      - "5432:5432"
+    volumes:
+        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   auth:
     build: ./authserver
     depends_on:
@@ -49,6 +42,15 @@ services:
   #     - "8080:8080"
   #   links:
   #     - "db"
+  # crawler:
+  #   build: ./crawler
+  #   links:
+  #     - rabbitmq
+  #     - elastic
+  #   depends_on:
+  #     - "rabbitmq"
+  #     - "elastic"
+  #   restart: "on-failure"
 
 volumes:
   es_data:

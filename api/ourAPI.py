@@ -29,12 +29,11 @@ class Handler:
 
         try: 
             await bd_handler.authorisation(vk_id=vk_id)
-            print(' ------ bd access ok')
         except:
             response = jsoner(status=400)
             return web.json_response(response)
 
-        response = jsoner(status=200,token=token.decode())
+        response = jsoner(status=200,token=token)
         return web.json_response(response)
 
     # TODO ELASTIC 
@@ -45,17 +44,13 @@ class Handler:
             vk_id = data['vk_id']
             token = data['app_token']
             access_token = data['access_token']
-            print('--------- got fields!!!')
         except:
             response = jsoner(status=400)
             return web.json_response(response)
 
         if not await self.auth_.authorize(user_id = vk_id, access_token = access_token,sign=token):
-            print('--------- not authorized!!!')
             response = jsoner(status=403)
             return web.json_response(response)
-
-        print('--------- authorized!!!')
 
         try: 
             result= await bd_handler.get_list_of_products(vk_id=vk_id)
