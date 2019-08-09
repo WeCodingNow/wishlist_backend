@@ -42,15 +42,15 @@ services:
       - "8080:8080"
     links:
       - "db"
-  # crawler:
-  #   build: ./crawler
-  #   links:
-  #     - rabbitmq
-  #     - elastic
-  #   depends_on:
-  #     - "rabbitmq"
-  #     - "elastic"
-  #   restart: "on-failure"
+  crawler:
+    build: ./crawler
+    links:
+      - rabbitmq
+      - elastic
+    depends_on:
+      - "rabbitmq"
+      - "elastic"
+    restart: "on-failure"
 
 volumes:
   es_data:
