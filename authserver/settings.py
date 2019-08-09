@@ -11,6 +11,10 @@ rabbit_settings = {
     'port': 5672,                   # default 5672
 }
 
+startup_settings = {
+    'start_delay' : 60
+}
+
 # rabbit_settings = {
 #     'host': 'localhost',            # default localhost
 #     'port': 5672,                   # default 5672

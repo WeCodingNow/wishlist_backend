@@ -39,7 +39,7 @@ services:
       - "elastic"
       - "db"
     ports:
-      - "8080:8080"
+      - "8080:3000"
     links:
       - "db"
   crawler:
@@ -51,6 +51,12 @@ services:
       - "rabbitmq"
       - "elastic"
     restart: "on-failure"
+  nginx:
+    build: ./nginx
+    links:
+      - api
+    ports:
+      - "80:80"
 
 volumes:
   es_data:

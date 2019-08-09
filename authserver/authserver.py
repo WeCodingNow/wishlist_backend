@@ -5,7 +5,7 @@ from aio_pika import connect, IncomingMessage, Exchange, Message
 import json
 import jwt
 
-from settings import settings, rabbit_settings
+from settings import settings, rabbit_settings, startup_settings
 
 def grab_user_params(params) -> dict:
     query_params = {
@@ -62,7 +62,7 @@ async def on_auth_message(exchange: Exchange, message: IncomingMessage):
         print('authorization request complete')
 
 async def main(loop):
-    await asyncio.sleep(20)
+    await asyncio.sleep(startup_settings['start_delay'])
     connection = await connect(**rabbit_settings, loop=loop)
 
     channel = await connection.channel()

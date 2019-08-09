@@ -3,7 +3,7 @@ from typing import *
 import asyncio
 import aio_pika
 
-from settings import crawler_settings, elastic_settings, rabbit_settings
+from settings import crawler_settings, elastic_settings, rabbit_settings, startup_settings
 
 from simple_fetcher import SimpleFetcherRPSC
 from obi_parser import ObiParser
@@ -106,7 +106,7 @@ class Crawler:
 
 
 async def main(loop):
-    await asyncio.sleep(20)
+    await asyncio.sleep(startup_settings['start_delay'])
     connection = await aio_pika.connect(**rabbit_settings, loop=loop)
 
     c = Crawler(**crawler_settings, **elastic_settings, rabbit_connection=connection)
