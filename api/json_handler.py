@@ -11,10 +11,10 @@ def jsoner(vk_id = None,**kwargs):
             wishlist = kwargs['wishlist']
             # print(kwargs['wishlist'])
             for wish in wishlist:
-                if wish['gift'] == vk_id:
-                    wish['gift'] = 'You'
-                elif wish['gift'] == None:
+                if wish['gift'] == None:
                     wish['gift'] = 'Nobody'
+                elif wish['gift'] == vk_id:
+                    wish['gift'] = 'You'           
                 else:
                     wish['gift'] = 'Somebody'
             response['products'] = wishlist
@@ -33,3 +33,5 @@ def jsoner(vk_id = None,**kwargs):
             response['token']=kwargs['token']
 
     return response
+
+jsoner(status=200,)

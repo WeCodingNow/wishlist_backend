@@ -1,3 +1,4 @@
 {
     "python.pythonPath": "/home/bass/.virtualenvs/wishlist_api/bin/python"
+    // "python.pythonPath":".venv/bin/python3"
 }

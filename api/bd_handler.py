@@ -112,7 +112,11 @@ class bd_handler:
         if len(res) == 0:
             raise asyncpg.exceptions.NoDataFoundError('No users found')
         id = res[0]['user_id']
-        await self.addingwish(product_id=product_id,user_id=id)
+        res = await self.checking_log(product_id=product_id,user_id = id)
+        if len(res) ==0:
+            await self.addingwish(product_id=product_id,user_id=id)
+        else:
+            raise asyncpg.exceptions.DuplicateObjectError('You already added it')
 
     @classmethod
     async def to_gift(self,my_id,friend_id,product_id):

@@ -109,7 +109,7 @@ class queryset():
 
     def __aiter__(self):
         self.cache = []
-
+        self.current_item = 0
         return self
 
     async def __anext__(self):

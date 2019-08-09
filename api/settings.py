@@ -6,25 +6,26 @@ settings = {
     'reg_queue_name': "reg_queue",
 }
 
-# rabbit_settings = {
-#     'host': 'rabbitmq',             # default localhost
-#     'port': 5672,                   # default 5672
-# }
-
 rabbit_settings = {
-    'host': 'localhost',            # default localhost
+    'host': 'rabbitmq',             # default localhost
     'port': 5672,                   # default 5672
 }
 
-# postgres_settings = {
-#     'host': 'db',
-#     'port': 5432,
+# rabbit_settings = {
+#     'host': 'localhost',            # default localhost
+#     'port': 5672,                   # default 5672
 # }
 
 postgres_settings = {
-    'host': 'localhost',
+    'host': 'db',
     'port': 5432,
 }
 
+# postgres_settings = {
+#     'host': 'localhost',
+#     'port': 5432,
+# }
+
 
 elastic_settings = [{'host': 'elastic', 'port': 9200}]
+# elastic_settings = [{'host': 'localhost', 'port': 9200}]
